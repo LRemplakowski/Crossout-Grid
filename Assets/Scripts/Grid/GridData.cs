@@ -4,11 +4,6 @@ namespace Crossout.Grid
 {
     public class GridData
     {
-        private const int DEFAULT_MIN_VALUE = 1;
-        private const int DEFAULT_MAX_VALUE = 11;
-        private const int DEFAULT_GRID_WIDTH = 4;
-        private const int DEFAULT_GRID_HEIGHT = 4;
-
         private readonly int[,] _gridValues;
 
         public int this[int x, int y]
@@ -42,14 +37,14 @@ namespace Crossout.Grid
 
         public class Builder
         {
-            private int _gridWidth = DEFAULT_GRID_WIDTH;
-            private int _gridHeight = DEFAULT_GRID_HEIGHT;
+            private int _gridWidth = IGridDefinition.DEFAULT_GRID_WIDTH;
+            private int _gridHeight = IGridDefinition.DEFAULT_GRID_HEIGHT;
             private IGridRandomizationStrategy _cellRandomizationStrategy;
 
             public Builder Reset()
             {
-                _gridWidth = DEFAULT_GRID_WIDTH;
-                _gridHeight = DEFAULT_GRID_HEIGHT;
+                _gridWidth = IGridDefinition.DEFAULT_GRID_WIDTH;
+                _gridHeight = IGridDefinition.DEFAULT_GRID_HEIGHT;
                 _cellRandomizationStrategy = null;
                 return this;
             }
@@ -85,14 +80,14 @@ namespace Crossout.Grid
                     throw new InvalidOperationException($"Invalid Grid dimensions! Dimension cannot be less than 1! Width: {_gridWidth}, Height: {_gridHeight}");
                 }
                 int[,] cells = new int[_gridWidth, _gridHeight];
-                EnsureRandimazationStrategy();
+                EnsureRandomizationStrategy();
                 PopulateCells(cells, _cellRandomizationStrategy);
                 return new GridData(cells);
             }
 
-            private void EnsureRandimazationStrategy()
+            private void EnsureRandomizationStrategy()
             {
-                _cellRandomizationStrategy ??= new UnityRandomStrategy(DEFAULT_MIN_VALUE, DEFAULT_MAX_VALUE);
+                _cellRandomizationStrategy ??= new UnityRandomStrategy(IGridDefinition.DEFAULT_MIN_VALUE, IGridDefinition.DEFAULT_MAX_VALUE);
             }
 
             private static void PopulateCells(int[,] cells, IGridRandomizationStrategy populationStrategy)
