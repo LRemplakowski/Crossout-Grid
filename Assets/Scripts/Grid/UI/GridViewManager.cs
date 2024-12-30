@@ -21,23 +21,20 @@ namespace Crossout.Grid.UI
             _viewFactory = new(_viewPrefab, _viewParent);
             _viewInstances = new();
 
-            _gridController.OnGridUpdated += OnGridUpdated;
+            _gridController.OnGridUpdated += SetupViews;
+            _gridController.OnGridDisposed += CleanupPreviousViews;
         }
 
         private void OnDestroy()
         {
-            _gridController.OnGridUpdated -= OnGridUpdated;
+            _gridController.OnGridUpdated -= SetupViews;
+            _gridController.OnGridDisposed -= CleanupPreviousViews;
         }
 
-        private void OnGridUpdated(GridData gridData)
-        {
-            SetupViews(gridData);
-        }
-
-        private void SetupViews(int[,] grid)
+        private void SetupViews(GridData gridData)
         {
             CleanupPreviousViews();
-            InstantiateViews(grid);
+            InstantiateViews(gridData);
         }
 
         private void CleanupPreviousViews()
@@ -46,6 +43,7 @@ namespace Crossout.Grid.UI
             _viewInstances.Clear();
         }
 
+        // Should be refactored to use Object Pooling
         private void InstantiateViews(int[,] grid)
         {
             var width = grid.GetLength(0);

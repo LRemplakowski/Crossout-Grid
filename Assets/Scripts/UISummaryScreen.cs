@@ -8,14 +8,17 @@ public class UISummaryScreen : MonoBehaviour
     public class SummaryInfoDM
     {
         public bool PlayerWon;
-        public int? Score;
+        public int? ScoreAdjustment;
+        public int? TotalScore;
     }
 
     [SerializeField]
     private Text winnerLabel;
 
     [SerializeField]
-    private Text scoreLabel;
+    private Text scoreAdjustmentLabel;
+    [SerializeField]
+    private Text totalScoreLabel;
 
     private UnityAction onClose;
 
@@ -32,17 +35,22 @@ public class UISummaryScreen : MonoBehaviour
         {
             winnerLabel.text = info.PlayerWon ? "You won!!!" : "You lose...";
 
-            scoreLabel.gameObject.SetActive(info.Score.HasValue);
-            if (info.Score.HasValue)
+            scoreAdjustmentLabel.gameObject.SetActive(info.ScoreAdjustment.HasValue);
+            totalScoreLabel.gameObject.SetActive(info.TotalScore.HasValue);
+            if (info.ScoreAdjustment.HasValue)
             {
-                scoreLabel.text = "Points: " + info.Score.Value.ToString("N0", CultureInfo.InvariantCulture);
+                scoreAdjustmentLabel.text = "Points: " + info.ScoreAdjustment.Value.ToString("N0", CultureInfo.InvariantCulture);
+            }
+            if (info.TotalScore.HasValue)
+            {
+                totalScoreLabel.text = "Total Score: " + info.TotalScore.Value.ToString("N0", CultureInfo.InvariantCulture);
             }
         }
         else
         {
             Debug.LogError("No info was passed!");
             winnerLabel.text = "Missing info";
-            scoreLabel.gameObject.SetActive(false);
+            totalScoreLabel.gameObject.SetActive(false);
         }
 
         gameObject.SetActive(true);

@@ -6,8 +6,6 @@ namespace Crossout.Grid.UI
 {
     public class GridCellView : MonoBehaviour, IGridCellView
     {
-        public GameObject Self => gameObject;
-
         [SerializeField]
         private Button _deselectedButton;
         [SerializeField]

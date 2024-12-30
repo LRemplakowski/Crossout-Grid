@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreController : MonoBehaviour
+namespace Crossout.Scoring
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ScoreController : MonoBehaviour
     {
-        
-    }
+        private IWinStrategy _cachedWinStrategy = new DefaultWinStrategy();
+        private int _currentScore = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void ResetScore()
+        {
+            _currentScore = 0;
+        }
+
+        public UISummaryScreen.SummaryInfoDM EvaluateRoundScore(int selectedCellsValue)
+        {
+            bool isWin = _cachedWinStrategy.EvaluateWin(in selectedCellsValue, out int netScoreChange);
+            _currentScore += netScoreChange;
+            return new()
+            {
+                PlayerWon = isWin,
+                ScoreAdjustment = netScoreChange,
+                TotalScore = _currentScore,
+            };
+        }
     }
 }
