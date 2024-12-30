@@ -7,7 +7,7 @@ namespace Crossout.Grid.UI
     public class ScoreSubmissionController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _submitButtonGO;
+        private GameObject _submissionView;
         [SerializeField]
         private GridController _gridController;
         [SerializeField]
@@ -41,7 +41,7 @@ namespace Crossout.Grid.UI
 
         private void OnCellSelectionUpdated(int selectedCellsCount)
         {
-            _submitButtonGO.SetActive(selectedCellsCount > 0);
+            _submissionView.SetActive(selectedCellsCount > 0);
         }
 
         public void SubmitScore()

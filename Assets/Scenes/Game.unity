@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc5c3a4ae0dedd478014d45484a1e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _submitButtonGO: {fileID: 1256586146}
+  _submissionView: {fileID: 1256586146}
   _gridController: {fileID: 1129743919}
   _gameManager: {fileID: 580738094}
 --- !u!4 &272958607
