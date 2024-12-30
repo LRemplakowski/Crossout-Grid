@@ -5,6 +5,8 @@ namespace Crossout.Grid
 {
     public class GridData
     {
+        public static implicit operator int[,](GridData data) => data._gridValues.Clone() as int[,];
+
         private readonly int[,] _gridValues;
 
         public int this[int x, int y]

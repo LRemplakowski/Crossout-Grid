@@ -13,6 +13,7 @@ namespace Crossout.Grid.UI
         [SerializeField]
         private Button _selectedButton;
 
+        [SerializeField]
         private Vector2Int _gridPosition;
         private Action<Vector2Int> _onSelected;
         private Action<Vector2Int> _onDeselected;

@@ -6,8 +6,6 @@ namespace Crossout.Grid
 {
     public class GridController : MonoBehaviour
     {
-        private const int MAX_SELECTED_CELLS = 3;
-
         [SerializeField]
         private GridConfig _gridGenerationConfig;
 
@@ -19,7 +17,7 @@ namespace Crossout.Grid
 
         private HashSet<Vector2Int> _selectedCells = new();
 
-        public static event Action<GridData> OnGridUpdated;
+        public event Action<GridData> OnGridUpdated;
 
         private void Awake()
         {
@@ -58,7 +56,7 @@ namespace Crossout.Grid
 
         public bool CanSelectCell()
         {
-            return _selectedCells.Count < MAX_SELECTED_CELLS;
+            return true;
         }
     }
 }

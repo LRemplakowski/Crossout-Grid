@@ -20,9 +20,21 @@ namespace Crossout.Grid.UI
         {
             _viewFactory = new(_viewPrefab, _viewParent);
             _viewInstances = new();
+
+            _gridController.OnGridUpdated += OnGridUpdated;
         }
 
-        public void SetupViews(int[,] grid)
+        private void OnDestroy()
+        {
+            _gridController.OnGridUpdated -= OnGridUpdated;
+        }
+
+        private void OnGridUpdated(GridData gridData)
+        {
+            SetupViews(gridData);
+        }
+
+        private void SetupViews(int[,] grid)
         {
             CleanupPreviousViews();
             InstantiateViews(grid);
