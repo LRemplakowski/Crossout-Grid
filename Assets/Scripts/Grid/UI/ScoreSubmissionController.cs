@@ -15,24 +15,31 @@ namespace Crossout.Grid.UI
 
         private void Awake()
         {
-            _gridController.OnCellSelected += UpdateButtonVisibility;
-            _gridController.OnCellDeselected += UpdateButtonVisibility;
-            _gridController.OnGridUpdated += ResetVisibility;
+            _gridController.OnCellSelected += OnCellSelectionUpdated;
+            _gridController.OnCellDeselected += OnCellSelectionUpdated;
+            _gridController.OnGridUpdated += OnGridUpdated;
+            _gridController.OnGridDisposed += OnGridDisposed;
         }
 
         private void OnDestroy()
         {
-            _gridController.OnCellDeselected -= UpdateButtonVisibility;
-            _gridController.OnCellDeselected -= UpdateButtonVisibility;
-            _gridController.OnGridUpdated -= ResetVisibility;
+            _gridController.OnCellDeselected -= OnCellSelectionUpdated;
+            _gridController.OnCellDeselected -= OnCellSelectionUpdated;
+            _gridController.OnGridUpdated -= OnGridUpdated;
+            _gridController.OnGridDisposed -= OnGridDisposed;
         }
 
-        private void ResetVisibility(GridData _)
+        private void OnGridDisposed()
         {
-            UpdateButtonVisibility(0);
+            OnCellSelectionUpdated(0);
         }
 
-        private void UpdateButtonVisibility(int selectedCellsCount)
+        private void OnGridUpdated(GridData _)
+        {
+            OnCellSelectionUpdated(0);
+        }
+
+        private void OnCellSelectionUpdated(int selectedCellsCount)
         {
             _submitButtonGO.SetActive(selectedCellsCount > 0);
         }
