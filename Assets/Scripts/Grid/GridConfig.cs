@@ -6,13 +6,13 @@ namespace Crossout.Grid
     public class GridConfig : ScriptableObject, IGridDefinition
     {
         [SerializeField]
-        private int _gridWidth;
+        private int _gridWidth = IGridDefinition.DEFAULT_GRID_WIDTH;
         [SerializeField]
-        private int _gridHeight;
+        private int _gridHeight = IGridDefinition.DEFAULT_GRID_HEIGHT;
         [SerializeField]
-        private int _minCellValue;
+        private int _minCellValue = IGridDefinition.DEFAULT_MIN_VALUE;
         [SerializeField]
-        private int _maxCellValue;
+        private int _maxCellValue = IGridDefinition.DEFAULT_MAX_VALUE;
 
         private IGridRandomizationStrategy _cachedStrategy;
 

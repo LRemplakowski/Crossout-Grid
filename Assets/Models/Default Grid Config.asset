@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c3be6c7df9b8f49b4c66a8c0f5c076, type: 3}
   m_Name: Default Grid Config
   m_EditorClassIdentifier: 
-  _gridWidth: 0
-  _gridHeight: 0
-  _minCellValue: 0
-  _maxCellValue: 0
+  _gridWidth: 4
+  _gridHeight: 4
+  _minCellValue: 1
+  _maxCellValue: 11
